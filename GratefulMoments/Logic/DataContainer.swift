@@ -1,5 +1,8 @@
 import SwiftData
+import SwiftUI
 
+@Observable
+@MainActor
 class DataContainer {
     let modelContainer: ModelContainer
     
@@ -7,19 +10,38 @@ class DataContainer {
         modelContainer.mainContext
     }
     
-    init() {
+    init(includeSampleMoments: Bool = false) {
         let schema = Schema([
             Moment.self,
         ])
         
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: includeSampleMoments)
         
         do {
             modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
             
+            if includeSampleMoments {
+                loadSampleMoments()
+            }
             try context.save()
         } catch {
             fatalError("Could not create ModelConatiner \(error)")
         }
+    }
+    
+    private func loadSampleMoments() {
+        for moment in Moment.sampleData {
+            context.insert(moment)
+        }
+    }
+}
+
+private let sampleContainer = DataContainer(includeSampleMoments: true)
+
+extension View {
+    func sampleDataaContainer() -> some View {
+        self
+            .environment(sampleContainer)
+            .modelContainer(sampleContainer.modelContainer)
     }
 }
