@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  GratefulMoments
-//
-//  Created by Nathan Harris on 12/11/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
