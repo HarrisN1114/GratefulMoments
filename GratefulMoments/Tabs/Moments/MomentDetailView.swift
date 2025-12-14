@@ -38,7 +38,7 @@ struct MomentDetailView: View {
             Text(moment.timestamp, style: .date)
                 .font(.subheadline)
             if !moment.note.isEmpty {
-                Text("Notes")
+                Text(moment.note)
                     .textSelection(.enabled)
             }
             if let image = moment.image {
