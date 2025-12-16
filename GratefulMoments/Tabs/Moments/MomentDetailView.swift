@@ -71,3 +71,10 @@ struct MomentDetailView: View {
             .sampleDataContainer()
     }
 }
+
+#Preview("Long Note") {
+    NavigationStack {
+        MomentDetailView(moment: Moment.longTextSample)
+            .sampleDataContainer()
+    }
+}
