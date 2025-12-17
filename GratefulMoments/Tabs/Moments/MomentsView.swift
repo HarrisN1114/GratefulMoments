@@ -23,7 +23,7 @@ struct MomentsView: View {
             .overlay {
                 if moments.isEmpty {
                     ContentUnavailableView {
-                        Label("No moments yet!", systemImage: "exclaimationmark.circle.fill")
+                        Label("No moments yet!", systemImage: "exclamationmark.circle.fill")
                     } description: {
                         Text("Post a note or photo to start fillin this space with gratitide.")
                     }
